@@ -1,5 +1,12 @@
 const inquirer = require('inquirer');
+const mysql = require('mysql2');
+const { config }= require('./config')
 
+// Connect to database
+const db = mysql.createConnection(
+    config, 
+    console.log(`Connected to the employee_db database.`)
+)
 
 const initQuery = () => {
 inquirer
