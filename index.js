@@ -4,10 +4,18 @@ const db = require('./dbqueries')
 
 //Select all employees
 const employeeList = () => {
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.log(results);
-    });
+    db.query('SELECT * FROM employee', function (err, results) {
+        console.table(results);
+    }
+    ); if(error) console.log(error) //this error notation is incorrect
 }
+//can also add this within the function instead:                         
+// () => {
+//     db.query('SELECT * FROM employee', function (err, results) {
+//         console.log(results);
+//     });
+// },
+
 
 // const departmentList = () => {
 //     db.query('SELECT * FROM department', function (err, results) {
@@ -83,11 +91,7 @@ const initQuery = () => {
                         type: "list",
                         message: "Which employee's role do you want to update",
                         name: "updateRole",
-                        choices: () => {
-                            db.query('SELECT * FROM employee', function (err, results) {
-                                console.log(results);
-                            });
-                        },
+                        choices: employeeList(),
                     }
                 ]).then((answer2) => {
                     console.log(answer2)
