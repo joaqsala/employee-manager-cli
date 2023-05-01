@@ -1,13 +1,14 @@
-const mysql = require('mysql2');
-const config = require('./config/connection')
-// const { initQuery } = require('./inquirer');
+// const mysql = require('mysql2');
+// const config = require('./config/connection')
+const inquirer = require('inquirer');
+const db = require('./dbqueries')
 
 
-const db = mysql.createConnection(config);
+// const db = mysql.createConnection(config);
 
-db.connect((error) => {
-    if (error) throw error; 
-    console.log("Connected to database.")})
+// db.connect((error) => {
+//     if (error) throw error; 
+//     console.log("Connected to database.")})
 
 
 
@@ -29,8 +30,6 @@ const employeeList = () => {
 //         console.log(results);
 //     });
 // }
-
-const inquirer = require('inquirer');
 
 
 
