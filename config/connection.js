@@ -8,7 +8,6 @@ const config = {
     password: process.env.DB_PASSWORD,
     database: 'employee_db',
 
-    isServer: true,
 }
 
-module.exports = { config }
+module.exports = config;
