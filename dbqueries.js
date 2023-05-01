@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
 const config = require('./config/connection')
-// const { initQuery } = require('./inquirer');
 
 
 const db = mysql.createConnection(config);
