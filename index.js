@@ -1,41 +1,12 @@
 const inquirer = require('inquirer');
-const db = require('./dbqueries')
+const employeeList = require('./dbqueries')
 
 
-//Select all employees
-const employeeList = () => {
-    db.query('SELECT * FROM employee', function (err, results) {
-        console.table(results);
-    }
-    ); if(error) console.log(error) //this error notation is incorrect
-}
-//can also add this within the function instead:                         
-// () => {
-//     db.query('SELECT * FROM employee', function (err, results) {
-//         console.log(results);
-//     });
-// },
-
-
-// const departmentList = () => {
-//     db.query('SELECT * FROM department', function (err, results) {
-//         console.log(results);
-//     });
-// }
-
-// const roleList = () => {
-//     db.query('SELECT * FROM role', function (err, results) {
-//         console.log(results);
-//     });
-// }
-
-
-
-const initQuery = () => {
+const initQuery = async () => {
     return inquirer
         .prompt([
         {
-        type: 'list',
+        type: 'rawlist',
         message: 'What would you like to do?',
         choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"],
         name: 'toDo',
@@ -83,23 +54,28 @@ const initQuery = () => {
         when: (answer) => answer.toDo === "Add an Employee",
         },
         ])
-        .then((answer) => {
-        if (answer.toDo === "Update Employee Role"){
-         inquirer
-                .prompt([
-                    {
-                        type: "list",
-                        message: "Which employee's role do you want to update",
-                        name: "updateRole",
-                        choices: employeeList(),
-                    }
-                ]).then((answer2) => {
-                    console.log(answer2)
-                }
-        )}
+        .then( async (answer) => {
+            switch (answer.toDo) {
+                case "View All Employees":
+                    await employeeList();
+                    await initQuery();
+                    break;
+            
+                default:
+                    break;
+            }})
+
+        // inquirer
+        //         .prompt([
+        //             {
+        //                 type: "list",
+        //                 message: "Which employee's role do you want to update",
+        //                 name: "updateRole",
+                        // choices: dbqueries.employeeList(),
+        //                 dbqueries.employeeList()
+        //             }
+        // })
         // const svgContent = renderSVG(answer);
-    
-        })
         .catch((error) => {
             if (error) {
             console.log(error)
