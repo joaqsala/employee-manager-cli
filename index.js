@@ -60,7 +60,18 @@ const initQuestion = async () => {
                     await initQueries.employeeList();
                     await initQuestion();
                     break;
-            
+                case "View All Departments":
+                    await initQueries.departmentList();
+                    await initQuestion();
+                    break;
+                case "View All Roles":
+                    await initQueries.roleList();
+                    await initQuestion();
+                    break;
+                case "View All Roles":
+                    await initQueries.roleList();
+                    await initQuestion();
+                    break;                    
                 default:
                     break;
             }})

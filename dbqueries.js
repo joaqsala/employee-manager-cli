@@ -24,7 +24,33 @@ const initQueries = {
         }
         });
     });
-    }
+    },
+    departmentList: async () => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM department', (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                console.table(results);
+                resolve(results);
+            }
+            });
+        });
+        },
+    roleList: async () => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM role', (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                console.table(results);
+                resolve(results);
+            }
+            });
+        });
+        }
 }
 
 module.exports = initQueries;
