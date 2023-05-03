@@ -9,38 +9,26 @@ db.connect((error) => {
     console.log("Connected to database."
     )})
 
-//     const dbqueries = {
-//         employeeList: async () => {
-//         try {
-//             const [rows, fields] = await db.promise().query('SELECT * FROM employee');
-//             console.table(rows);
-//             db.end();
-//             return rows;
-//         } catch (err) {
-//             console.log(err);
-//         }
-//         }
-//     };
 
-
-// module.exports = dbqueries;
-
-// //Select all employees
-const employeeList = async () => {
-  return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM employee', (err, results) => {
-      if (err) {
-        console.log(err);
-        reject(err);
-      } else {
-        console.table(results);
-        resolve(results);
-      }
+const initQueries = {
+    //Select all employees
+    employeeList: async () => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM employee', (err, results) => {
+        if (err) {
+            console.log(err);
+            reject(err);
+        } else {
+            console.table(results);
+            resolve(results);
+        }
+        });
     });
-  });
+    }
 }
 
-module.exports = employeeList;
+module.exports = initQueries;
+
 //can also add this within the function instead:                         
 // () => {
 //     db.query('SELECT * FROM employee', function (err, results) {

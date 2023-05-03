@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-const employeeList = require('./dbqueries')
+const initQueries = require('./dbqueries')
 
 
-const initQuery = async () => {
+const initQuestion = async () => {
     return inquirer
         .prompt([
         {
@@ -57,8 +57,8 @@ const initQuery = async () => {
         .then( async (answer) => {
             switch (answer.toDo) {
                 case "View All Employees":
-                    await employeeList();
-                    await initQuery();
+                    await initQueries.employeeList();
+                    await initQuestion();
                     break;
             
                 default:
@@ -84,4 +84,4 @@ const initQuery = async () => {
 
 
 
-initQuery();
+initQuestion();
