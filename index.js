@@ -6,7 +6,7 @@ const initQuestion = async () => {
     return inquirer
         .prompt([
         {
-        type: 'rawlist',
+        type: 'list',
         message: 'What would you like to do?',
         choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"],
         name: 'toDo',
@@ -43,15 +43,9 @@ const initQuestion = async () => {
         },
         {
         type: "input",
-        message: "What is the new employee's role?",
-        name: "newEmployeeRole",
-        when: (answer) => answer.toDo === "Add Employee",
-        },
-        {
-        type: "input",
         message: "Who is the new employee's manager?",
-        name: "newEmployeeRole",
-        when: (answer) => answer.toDo === "Add an Employee",
+        name: "newEmployeeManager",
+        when: (answer) => answer.toDo === "Add Employee",
         },
         ])
         .then( async (answer) => {
@@ -62,16 +56,42 @@ const initQuestion = async () => {
                     break;
                 case "View All Departments":
                     await initQueries.departmentList();
+                //     inquirer
+                //     .prompt([
+                //     {
+                //     type: 'input',
+                //     message: 'Testing',
+                //     name: 'toDoooooo',
+                //     },
+                // ]).then(async (data) => {
+                //     console.log(data)
+                // })
                     await initQuestion();
                     break;
                 case "View All Roles":
                     await initQueries.roleList();
                     await initQuestion();
                     break;
-                case "View All Roles":
-                    await initQueries.roleList();
+                case "Add Department":
+                    await initQueries.addDepartment(answer.addDept);
                     await initQuestion();
-                    break;                    
+                    break;  
+                case "Add Employee":
+                    inquirer
+                    .prompt([
+                    {
+                        type: "list",
+                        message: "What is the new employee's role?",
+                        name: "newEmployeeRole",
+                        choices: [initQueries.roleList()]
+                        }
+                    ])
+                    await ((newEmployeeRole)=>{
+                        console.log(newEmployeeRole)
+                    })
+                    await initQuestion();
+            
+                    break;                      
                 default:
                     break;
             }})
