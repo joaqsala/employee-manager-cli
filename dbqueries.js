@@ -41,7 +41,7 @@ const initQueries = {
         },
     roleList: async () => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM role', (err, results) => {
+            db.query('SELECT r.id, r.title, d.name AS department, r.salary FROM role r LEFT JOIN department d ON r.department_id = d.id;', (err, results) => {
             if (err) {
                 console.log(err);
                 reject(err);
