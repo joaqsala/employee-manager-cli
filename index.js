@@ -19,7 +19,7 @@ const initQuestion = async () => {
         },
         {
         type: "input",
-        message: "What role would you like to add?",
+        message: "What is the name of the role?",
         name: "addRole",
         when: (answer) => answer.toDo === "Add Role",
         },
@@ -76,6 +76,24 @@ const initQuestion = async () => {
                     await initQueries.addDepartment(answer.addDept);
                     await initQuestion();
                     break;  
+                case "Add Role":
+                    return inquirer
+                    .prompt([
+                    {
+                        type: "list",
+                        message: "Which department does the role belong to?",
+                        name: "newRoleDept",
+                        choices: await initQueries.deptListOf(),
+                    },
+                    ])
+                    .then( async (response) => {
+                        await initQueries.addRole(answer.addRole, answer.addSalary, response.newRoleDept)
+                    })
+                    // await ((newEmployeeRole)=>{
+                    //     console.log(newEmployeeRole)})
+                    // await initQueries.addRole(answer.addRole, answer.addRole,);
+                    // await initQuestion();
+                    break; 
                 case "Add Employee":
                     inquirer
                     .prompt([
