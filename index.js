@@ -56,16 +56,6 @@ const initQuestion = async () => {
                     break;
                 case "View All Departments":
                     await initQueries.departmentList();
-                //     inquirer
-                //     .prompt([
-                //     {
-                //     type: 'input',
-                //     message: 'Testing',
-                //     name: 'toDoooooo',
-                //     },
-                // ]).then(async (data) => {
-                //     console.log(data)
-                // })
                     await initQuestion();
                     break;
                 case "View All Roles":
@@ -77,7 +67,7 @@ const initQuestion = async () => {
                     await initQuestion();
                     break;  
                 case "Add Role":
-                    return inquirer
+                    inquirer
                     .prompt([
                     {
                         type: "list",
@@ -92,11 +82,12 @@ const initQuestion = async () => {
                     .then( async (response) => {
                         // console.log(response)
                         await initQueries.addRole(answer.addRole, answer.addSalary, response.newRoleDept)
+                        await initQuestion();
                     })
-                    // await ((newEmployeeRole)=>{
-                    //     console.log(newEmployeeRole)})
-                    // await initQueries.addRole(answer.addRole, answer.addRole,);
-                    // await initQuestion();
+                    .catch((err) => {
+                        if (error) {
+                        console.log(err)
+                    }});
                     break; 
                 case "Add Employee":
                     inquirer
@@ -138,3 +129,9 @@ const initQuestion = async () => {
 
 
 initQuestion();
+
+
+                // await ((newEmployeeRole)=>{
+                    //     console.log(newEmployeeRole)})
+                    // await initQueries.addRole(answer.addRole, answer.addRole,);
+                    // await initQuestion();

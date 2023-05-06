@@ -46,8 +46,6 @@ const initQueries = {
                 console.log(err);
                 reject(err);
             } else {
-                // console.log(results);
-                // console.log(deptList);
                 resolve(results);
             }
             });
