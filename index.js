@@ -41,12 +41,6 @@ const initQuestion = async () => {
         name: "lastName",
         when: (answer) => answer.toDo === "Add Employee",
         },
-        {
-        type: "input",
-        message: "Who is the new employee's manager?",
-        name: "newEmployeeManager",
-        when: (answer) => answer.toDo === "Add Employee",
-        },
         ])
         .then( async (answer) => {
             switch (answer.toDo) {
@@ -73,7 +67,7 @@ const initQuestion = async () => {
                         type: "list",
                         message: "Which department does the role belong to?",
                         name: "newRoleDept",
-                        choices: (await initQueries.deptListOf()).map((dept) => ({
+                        choices: (await initQueries.listOfDept()).map((dept) => ({
                             name: dept.name,
                             value: dept.id
                         })),
@@ -95,16 +89,29 @@ const initQuestion = async () => {
                     {
                         type: "list",
                         message: "What is the new employee's role?",
-                        name: "newEmployeeRole",
-                        choices: [initQueries.roleList()]
-                        }
+                        name: "newRoleEmployee",
+                        choices: (await initQueries.listOfRoles()).map((role) => ({
+                            name: role.title,
+                            value: role.id
+                        })),
+                    },
+                    {
+                        type: "input",
+                        message: "Who is the new employee's manager?",
+                        name: "newEmployeeManager",
+                        when: (answer) => answer.toDo === "Add Employee",
+                    },
                     ])
-                    await ((newEmployeeRole)=>{
-                        console.log(newEmployeeRole)
+                    .then( async (response) => {
+                        // console.log(response)
+                        await initQueries.addRole(answer.addRole, answer.addSalary, response.newRoleDept)
+                        await initQuestion();
                     })
-                    await initQuestion();
-            
-                    break;                      
+                    .catch((err) => {
+                        if (error) {
+                        console.log(err)
+                    }});
+                    break;                   
                 default:
                     break;
             }})

@@ -39,7 +39,7 @@ const initQueries = {
             });
         });
         },
-    deptListOf: async () => {
+    listOfDept: async () => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM department', (err, results) => {
             if (err) {
@@ -64,6 +64,18 @@ const initQueries = {
             });
         });
         },
+    listOfRoles: async () => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT id, title FROM role', (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                resolve(results);
+            }
+            });
+        });
+        },
     addDepartment: async (dept) => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO department (name) VALUES (?)', [dept], (err, results) => {
@@ -77,19 +89,19 @@ const initQueries = {
             });
         });
         },
-        addRole: async (newRole, newSalary, intoDepartment) => {
-            return new Promise((resolve, reject) => {
-                db.query(`INSERT INTO role (title, salary, department_id) VALUES ("${newRole}", ${newSalary}, ${intoDepartment})`, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    reject(err);
-                } else {
-                    console.log(`Added ${newRole} to the database`);
-                    resolve(results);
-                }
-                });
+    addRole: async (newRole, newSalary, intoDepartment) => {
+        return new Promise((resolve, reject) => {
+            db.query(`INSERT INTO role (title, salary, department_id) VALUES ("${newRole}", ${newSalary}, ${intoDepartment})`, (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                console.log(`Added ${newRole} to the database`);
+                resolve(results);
+            }
             });
-            },
+        });
+        },
         
 // To delete multiple options, set up a variable: idsToDelete = [3,5,6];
 
