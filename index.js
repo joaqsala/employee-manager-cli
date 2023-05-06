@@ -99,7 +99,7 @@ const initQuestion = async () => {
                         type: "list",
                         message: "Who is the new employee's manager?",
                         name: "newEmployeeManager",
-                        choices: (await initQueries.listOfManagers()).map((employee) => ({
+                        choices: (await initQueries.listOfEmployees()).map((employee) => ({
                             name: employee.name,
                             value: employee.id
                         })),
@@ -114,22 +114,42 @@ const initQuestion = async () => {
                         if (error) {
                         console.log(err)
                     }});
-                    break;                   
+                    break;    
+                case "Update Employee Role":
+                    inquirer
+                    .prompt([
+                    {
+                        type: "list",
+                        message: "Which employee's role do you want to update?",
+                        name: "updateEmployee",
+                        choices: (await initQueries.listOfEmployees()).map((employee) => ({
+                            name: employee.name,
+                            value: employee.id
+                        })),
+                    },
+                    {
+                        type: "list",
+                        message: "Which role do you want to assign the selected employee?",
+                        name: "updateRole",
+                        choices: (await initQueries.listOfRoles()).map((role) => ({
+                            name: role.title,
+                            value: role.id
+                        })),
+                    },
+                    ])
+                    .then( async (response) => {
+                        // console.log(response)
+                        await initQueries.updateEmpRole(response.updateEmployee, response.updateRole)
+                        await initQuestion();
+                    })
+                    .catch((err) => {
+                        if (error) {
+                        console.log(err)
+                    }});
+                    break;                
                 default:
                     break;
             }})
-
-        // inquirer
-        //         .prompt([
-        //             {
-        //                 type: "list",
-        //                 message: "Which employee's role do you want to update",
-        //                 name: "updateRole",
-                        // choices: dbqueries.employeeList(),
-        //                 dbqueries.employeeList()
-        //             }
-        // })
-        // const svgContent = renderSVG(answer);
         .catch((error) => {
             if (error) {
             console.log(error)

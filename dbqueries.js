@@ -102,7 +102,7 @@ const initQueries = {
             });
         });
         },
-    listOfManagers: async () => {
+    listOfEmployees: async () => {
         return new Promise((resolve, reject) => {
             db.query(`SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM employee`, (err, results) => {
             if (err) {
@@ -127,24 +127,20 @@ const initQueries = {
             });
         });
         },    
-// To delete multiple options, set up a variable: idsToDelete = [3,5,6];
+    updateEmpRole: async (updateEmployee, updateRole) => {
+        return new Promise((resolve, reject) => {
+            db.query(`Update employee SET role_id = ${updateRole} WHERE  ("${newfirstName}", "${newLastName}", ${forRole}, ${designateManager})`, (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                console.log(`Added ${newfirstName} ${newLastName} to the database`);
+                resolve(results);
+            }
+            });
+        });
+        },
 
-// db.query(`DELETE FROM course_names WHERE id IN = (?)`, [idsToDelete], (err, result) => {
-// it's an array inside an array [[3,5,6]] <- can be used for updating multiple rows as well
-    // addEmployee: async (firstName, lastName, role, manager) => {
-    //     return new Promise((resolve, reject) => {
-    //         const newEmployeeInfo = [firstName, lastName, role, manager]
-    //         db.query(`INSERT INTO employee (firstName, lastName, role, manager) VALUES ('${dept}')`, (err, results) => {
-    //         if (err) {
-    //             console.log(err);
-    //             reject(err);
-    //         } else {
-    //             console.log(`Added ${dept} to the database`);
-    //             resolve(results);
-    //         }
-    //         });
-    //     });
-    //     },
 }
 
 module.exports = initQueries;
