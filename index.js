@@ -83,10 +83,14 @@ const initQuestion = async () => {
                         type: "list",
                         message: "Which department does the role belong to?",
                         name: "newRoleDept",
-                        choices: await initQueries.deptListOf(),
+                        choices: (await initQueries.deptListOf()).map((dept) => ({
+                            name: dept.name,
+                            value: dept.id
+                        })),
                     },
                     ])
                     .then( async (response) => {
+                        // console.log(response)
                         await initQueries.addRole(answer.addRole, answer.addSalary, response.newRoleDept)
                     })
                     // await ((newEmployeeRole)=>{

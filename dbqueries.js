@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 const config = require('./config/connection')
-
+const cTable = require('console.table');
 
 const db = mysql.createConnection(config);
 
@@ -41,15 +41,14 @@ const initQueries = {
         },
     deptListOf: async () => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT name FROM department', (err, results) => {
+            db.query('SELECT * FROM department', (err, results) => {
             if (err) {
                 console.log(err);
                 reject(err);
             } else {
                 // console.log(results);
-                const deptList = results.map((result) => result.name);
                 // console.log(deptList);
-                resolve(deptList);
+                resolve(results);
             }
             });
         });
