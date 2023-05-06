@@ -113,6 +113,19 @@ const initQueries = {
             }
             });
         });
+        },
+    addEmployee: async (newfirstName, newLastName, forRole, designateManager) => {
+        return new Promise((resolve, reject) => {
+            db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${newfirstName}", "${newLastName}", ${forRole}, ${designateManager})`, (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                console.log(`Added ${newfirstName} ${newLastName} to the database`);
+                resolve(results);
+            }
+            });
+        });
         },    
 // To delete multiple options, set up a variable: idsToDelete = [3,5,6];
 

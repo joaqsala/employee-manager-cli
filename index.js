@@ -107,7 +107,7 @@ const initQuestion = async () => {
                     ])
                     .then( async (response) => {
                         // console.log(response)
-                        await initQueries.addRole(answer.addRole, answer.addSalary, response.newRoleDept)
+                        await initQueries.addEmployee(answer.firstName, answer.lastName, response.newRoleEmployee, response.newEmployeeManager)
                         await initQuestion();
                     })
                     .catch((err) => {
