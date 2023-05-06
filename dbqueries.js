@@ -102,7 +102,18 @@ const initQueries = {
             });
         });
         },
-        
+    listOfManagers: async () => {
+        return new Promise((resolve, reject) => {
+            db.query(`SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM employee`, (err, results) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                resolve(results);
+            }
+            });
+        });
+        },    
 // To delete multiple options, set up a variable: idsToDelete = [3,5,6];
 
 // db.query(`DELETE FROM course_names WHERE id IN = (?)`, [idsToDelete], (err, result) => {

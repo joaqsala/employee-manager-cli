@@ -96,10 +96,13 @@ const initQuestion = async () => {
                         })),
                     },
                     {
-                        type: "input",
+                        type: "list",
                         message: "Who is the new employee's manager?",
                         name: "newEmployeeManager",
-                        when: (answer) => answer.toDo === "Add Employee",
+                        choices: (await initQueries.listOfManagers()).map((employee) => ({
+                            name: employee.name,
+                            value: employee.id
+                        })),
                     },
                     ])
                     .then( async (response) => {
