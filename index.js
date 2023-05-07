@@ -1,6 +1,15 @@
 const inquirer = require('inquirer');
 const initQueries = require('./dbqueries')
+const logo = require('asciiart-logo');
 
+
+function init() {
+    const logoText = logo({ name: "Employee Tracker" }).render();
+
+    console.log(logoText);
+
+    initQuestion();
+};
 
 const initQuestion = async () => {
     return inquirer
@@ -157,5 +166,4 @@ const initQuestion = async () => {
     }
 
 
-
-initQuestion();
+init();
