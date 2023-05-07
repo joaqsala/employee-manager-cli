@@ -1,9 +1,10 @@
 const inquirer = require('inquirer');
 const initQueries = require('./dbqueries')
+const logo = require('asciiart-logo');
 
 
 function init() {
-    const logoText = logo({ name: "Employee Tracker" }).render();
+    const logoText = logo({ name: "Employee Manager" }).render();
 
     console.log(logoText);
 
