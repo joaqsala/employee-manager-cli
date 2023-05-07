@@ -159,9 +159,3 @@ const initQuestion = async () => {
 
 
 initQuestion();
-
-
-                // await ((newEmployeeRole)=>{
-                    //     console.log(newEmployeeRole)})
-                    // await initQueries.addRole(answer.addRole, answer.addRole,);
-                    // await initQuestion();

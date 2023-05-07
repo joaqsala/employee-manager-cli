@@ -83,7 +83,7 @@ const initQueries = {
                 console.log(err);
                 reject(err);
             } else {
-                console.log(`Added ${dept} to the database`);
+                console.log(`Added ${dept} to the database.`);
                 resolve(results);
             }
             });
@@ -96,7 +96,7 @@ const initQueries = {
                 console.log(err);
                 reject(err);
             } else {
-                console.log(`Added ${newRole} to the database`);
+                console.log(`Added ${newRole} to the database.`);
                 resolve(results);
             }
             });
@@ -121,7 +121,7 @@ const initQueries = {
                 console.log(err);
                 reject(err);
             } else {
-                console.log(`Added ${newfirstName} ${newLastName} to the database`);
+                console.log(`Added ${newfirstName} ${newLastName} to the database.`);
                 resolve(results);
             }
             });
@@ -129,19 +129,19 @@ const initQueries = {
         },    
     updateEmpRole: async (updateEmployee, updateRole) => {
         return new Promise((resolve, reject) => {
-            db.query(`Update employee SET role_id = ${updateRole} WHERE  ("${newfirstName}", "${newLastName}", ${forRole}, ${designateManager})`, (err, results) => {
+            // console.log(updateEmployee, updateRole);
+            db.query(`UPDATE employee SET role_id = ${updateRole} WHERE id = ${updateEmployee}`, (err, results) => {
+                // console.log(updateEmployee, updateRole);
             if (err) {
                 console.log(err);
                 reject(err);
             } else {
-                console.log(`Added ${newfirstName} ${newLastName} to the database`);
+                console.log(`Updated employee's role.`);
                 resolve(results);
             }
-            });
         });
-        },
-
+        });
 }
-
-module.exports = initQueries;
+}
+module.exports = initQueries
 
