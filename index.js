@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const initQueries = require('./dbqueries')
-const logo = require('asciiart-logo');
 
 
 function init() {
